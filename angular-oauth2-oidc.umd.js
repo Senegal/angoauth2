@@ -1418,7 +1418,7 @@ var OAuthService = (function (_super) {
                 if (!e || !e.data || typeof e.data !== 'string') return;
                 var message = e.data;
                 if(!message.startsWith('#')) return;
-                this.tryLogin({customHashFragment: message});
+                _this.tryLogin({customHashFragment: message});
                 newwindow.close();
             }, true);
 
