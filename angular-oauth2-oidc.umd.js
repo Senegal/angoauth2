@@ -1413,16 +1413,16 @@ var OAuthService = (function (_super) {
         this.createLoginUrl(additionalState, loginHint, null, false, addParams).then(function (url) {
             //location.href = url;
             
-            let windowEventHandler = function(e){
+            
+            let newwindow = window.open(url, 'Login','width=400,height=600');
+            window.addEventListener('message', function(e){
                 if (!e || !e.data || typeof e.data !== 'string') return;
                 let message = e.data;
                 console.log(message);
                 if(!message.startsWith('#')) return;
                 this.tryLogin({customHashFragment: message});
                 newwindow.close();
-            }
-            let newwindow = window.open(url, 'Login','width=400,height=600');
-            window.addEventListener('message', windowEventHandler, true);
+            }, true);
 
 
         })
