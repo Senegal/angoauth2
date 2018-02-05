@@ -2239,7 +2239,7 @@ var DefaultOAuthInterceptor = (function () {
             return next.handle(req);
         var /** @type {?} */ sendAccessToken = this.moduleConfig.resourceServer.sendAccessToken;
         if (sendAccessToken) {
-            var /** @type {?} */ token = this.authStorage.getItem('access_token');
+            var /** @type {?} */ token = localStorage.getItem('access_token');
             var /** @type {?} */ header = 'Bearer ' + token;
             var /** @type {?} */ headers = req.headers
                 .set('Authorization', header);
