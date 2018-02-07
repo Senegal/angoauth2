@@ -1413,15 +1413,34 @@ var OAuthService = (function (_super) {
         this.createLoginUrl(additionalState, loginHint, null, false, addParams).then(function (url) {
             //location.href = url;
             
-            var screenX = if typeof window.screenX != 'undefined' then window.screenX else window.screenLeft
-            var screenY = if typeof window.screenY != 'undefined' then window.screenY else window.screenTop
-            var outerWidth = if typeof window.outerWidth != 'undefined' then window.outerWidth else document.body.clientWidth
-            var outerHeight = if typeof window.outerHeight != 'undefined' then window.outerHeight else document.body.clientHeight - 22
+            var width = 480;
+            var height = 640;
+            if(typeof window.screenX != 'undefined') {
+                var screenX =  window.screenX;
+            }else{
+                var screenX =  window.screenLeft;
+            }
+            if(typeof window.screenY != 'undefined'){ 
+                var screenY = window.screenY;
+            }else{
+                var screenY =  window.screenTop;
+            }
+            if(typeof window.outerWidth != 'undefined'){
+                var outerWidth =  window.outerWidth;
+            }else{
+                var outerWidth = document.body.clientWidth;
+            }
+            if(typeof window.outerHeight != 'undefined') {
+                var outerHeight =  window.outerHeight;
+            } else{ 
+                var outerHeight = document.body.clientHeight - 22;
+            }
+            
             var left = parseInt(screenX + (outerWidth - width) / 2, 10)
             var top = parseInt(screenY + (outerHeight - height) / 2.5, 10)
             var features = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top
             var newwindow = window.open(url, 'Login', features);
-            
+
             window.addEventListener('message', function(e){
                 if (!e || !e.data || typeof e.data !== 'string') return;
                 var message = e.data;
